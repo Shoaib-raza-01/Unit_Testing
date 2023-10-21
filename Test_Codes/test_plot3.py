@@ -8,3 +8,4 @@ class TestPlot2(unittest.TestCase):
     def test_plot2(self):
         res = {'Sunrisers Hyderabad': 2, 'Rising Pune Supergiants': 1}
         self.assertEqual(execute(), res)
+        

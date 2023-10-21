@@ -1,7 +1,9 @@
+"""Importing the required module"""
 import csv
 import matplotlib.pyplot as plt
 
 def plot(data):
+    """Plot the graph"""
     plt.figure(figsize=(12,10))
     plt.bar(data.keys(),data.values())
     plt.xlabel("Teams")
@@ -12,22 +14,18 @@ def plot(data):
     plt.savefig('../images/plot3.png')
 
 def execute():
-    extra_runs_2016 ={}
+    """make the datastructure as required"""
+    # extra_runs_2016 ={}
     match_id_2016 =[]
     with open("../Dataset/mock_matches.csv", 'r', encoding="utf-8") as file:
         matches = csv.DictReader(file)
-
-
         for _match in matches:
             match_id = _match.get('id')
             season = _match.get('season')
-
-            # if season == '2015':
             if season == '2016' and match_id not in match_id_2016:
                 match_id_2016.append(match_id)
-                
     team_and_extra_run_2016 ={}
-    with open('../Dataset/mock_deliveries.csv', 'r') as file:
+    with open('../Dataset/mock_deliveries.csv', 'r', encoding='utf-8') as file:
         deliveries = csv.DictReader(file)
         for delivery in deliveries:
             match_id = delivery.get('match_id')
@@ -39,6 +37,5 @@ def execute():
                 else:
                     team_and_extra_run_2016[batting_team] += int(extras)
     plot(team_and_extra_run_2016)
-    # print(team_and_extra_run_2016)
     return team_and_extra_run_2016
 execute()
